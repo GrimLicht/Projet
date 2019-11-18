@@ -4,7 +4,8 @@ struct distance
 	char* Seq1;
 	char* Seq2;
 	struct distance* suiv;
-}
+};
+typedef struct distance DISTANCE;
 
 struct distance dist_find_min();
 

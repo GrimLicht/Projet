@@ -1,4 +1,13 @@
-int main(int argc, char** argv)
+#include <stdlib.h>
+#include <stdio.h>
+#include "sequence.h"
+
+
+
+int main()
 {
-	return 0;
+	int dist1 = 0;
+	SEQUENCE a; SEQUENCE b;
+	dist1 = calc_dist1(a ,b);
+	exit(0);
 }
