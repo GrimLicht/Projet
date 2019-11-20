@@ -3,50 +3,38 @@
 #include "sequence.h"
 #include "distance.h"
 
-
-// Calcule pour D1
-int calc_dist1(SEQUENCE a, SEQUENCE b)
-{
+void seq_stocker (char* seq, int i) //prends en arg le num de la seq, 
+{						  //renvoie la seq sous forme de tab
+	char namefile[24];
 	
-// Si les 2 sequences n'ont pas la meme taille on rajoute '-' pour compléter la plus petite sequence
-	if ( a.taille != b.taille) 
+	FILE* F = NULL;
+	//ouvre la sequence selon i
+	if (i < 10)
+		sprintf(namefile, "sequences_ADN/seq0%d.txt", i);
+	else
+		sprintf(namefile, "sequences_ADN/seq%d.txt", i);
+	
+	F = fopen(namefile, "r");
+	if(F == NULL)
 	{
-		if (a.taille < b.taille) {
-			while (a.taille < b.taille) {
-				a.base[a.taille] = '-';
-				a.taille = a.taille + 1;
-			}
-		}
-		if (a.taille > b.taille) {
-			while (a.taille > b.taille) {
-				b.base[b.taille] = '-';
-				b.taille = b.taille + 1;
-			}
-		}
+		printf("Erreur dans l'ouverture du fichier");
+		exit(1);
 	}
 	
-	
-
-	
-	float cmp = 0;
-	int i;
-	for(i=0;i<a.taille;i++)
+	int j = 1;
+	while (seq[j] != EOF)
 	{
-		if ((a.base[i] == 'A')&&(b.base[i] == 'A')) { cmp = cmp + 0;}
-		if ((a.base[i] == 'A')&&(b.base[i] == 'T')) { cmp = cmp + 2;}
-		if ((a.base[i] == 'A')&&(b.base[i] == 'C')) { cmp = cmp + 2;}
-		if ((a.base[i] == 'A')&&(b.base[i] == 'G')) { cmp = cmp + 1;}
-		if ((a.base[i] == 'A')&&(b.base[i] == '-')) { cmp = cmp + 1.5;}
-		if ((a.base[i] == 'T')&&(b.base[i] == 'T')) { cmp = cmp + 0;}
-		if ((a.base[i] == 'T')&&(b.base[i] == 'C')) { cmp = cmp + 1;}
-		if ((a.base[i] == 'T')&&(b.base[i] == 'G')) { cmp = cmp + 2;}
-		if ((a.base[i] == 'T')&&(b.base[i] == '-')) { cmp = cmp + 1.5;}
-		if ((a.base[i] == 'C')&&(b.base[i] == 'C')) { cmp = cmp + 0;}
-		if ((a.base[i] == 'C')&&(b.base[i] == 'G')) { cmp = cmp + 2;}
-		if ((a.base[i] == 'C')&&(b.base[i] == '-')) { cmp = cmp + 1.5;}
-		if ((a.base[i] == 'G')&&(b.base[i] == 'G')) { cmp = cmp + 0;}
-		if ((a.base[i] == 'G')&&(b.base[i] == '-')) { cmp = cmp + 1.5;}
+		seq[j] = fgetc(F);
+		j++;
 	}
-	return 0;
+	
+/*	while (j <= 20)
+	{
+		seq[j] = 'n';
+		j++;
+	}
+	*/
+	printf("%d\n", j);
+	
+	fclose(F);
 }
-

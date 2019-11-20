@@ -2,15 +2,15 @@ partie1: main1
 	./main1 
 	
 main1: main1.o distance.o sequence.o
-	gcc -Wall -o main1 main1.o sequence.o
+	gcc -Wall -o main1 main1.o sequence.o distance.o
 	
 main1.o: main1.c sequence.h distance.h
 	gcc -Wall -c main1.c 
 	
-sequence.o: sequence.h sequence.c
+sequence.o: sequence.c
 	gcc -Wall -c sequence.c
 
-distance.o:
+distance.o: distance.c 
 	gcc -Wall -c distance.c
 	
 	

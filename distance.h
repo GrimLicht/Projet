@@ -7,8 +7,6 @@ struct distance
 };
 typedef struct distance DISTANCE;
 
-struct distance dist_find_min();
+DISTANCE dist_find_min(); //trouve la distance min entre 2 sequences
 
-struct distance find_famille(struct distance dist_min);
-
-void place_famille(); //place familles dans un fichier par famille
+float calc_dist1(SEQUENCE a,SEQUENCE b);//renvoie la valeur de la distance
