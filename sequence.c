@@ -4,7 +4,7 @@
 #include "distance.h"
 
 void seq_stocker (char* seq, int i) //prends en arg le num de la seq, 
-{						  //renvoie la seq sous forme de tab
+{					   			    //renvoie la seq sous forme de tab
 	char namefile[24];
 	
 	FILE* F = NULL;
@@ -22,18 +22,17 @@ void seq_stocker (char* seq, int i) //prends en arg le num de la seq,
 	}
 	
 	int j = 1;
-	while ((seq[j] = fgetc(F))!= EOF)
-	{
+	while ((seq[j] = fgetc(F)) != EOF)
 		j++;
-	}
+		
 	while (j < 20)
 	{
 		seq[j] = '-';
 		j++;
 	}
-//	seq[j] = EOF;
 	
-	printf("%d\n", j);
+//	printf("%d\n", j);
 	
 	fclose(F);
 }
+

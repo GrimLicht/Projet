@@ -14,3 +14,9 @@ float calc_dist1 (SEQUENCE a, SEQUENCE b)
 	
 	return c;
 }
+
+
+/* Pour D2 il faut un tableau à double entrées pour calculer 
+ * La plus petite distance -> programmation dynamique (TD et CM faut voir)
+ * -> Algorithme de Needleman-Wunsch
+*/
