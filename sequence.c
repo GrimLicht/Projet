@@ -22,18 +22,17 @@ void seq_stocker (char* seq, int i) //prends en arg le num de la seq,
 	}
 	
 	int j = 1;
-	while (seq[j] != EOF)
+	while ((seq[j] = fgetc(F))!= EOF)
 	{
-		seq[j] = fgetc(F);
 		j++;
 	}
+	while (j < 20)
+	{
+		seq[j] = '-';
+		j++;
+	}
+//	seq[j] = EOF;
 	
-/*	while (j <= 20)
-	{
-		seq[j] = 'n';
-		j++;
-	}
-	*/
 	printf("%d\n", j);
 	
 	fclose(F);

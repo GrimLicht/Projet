@@ -15,10 +15,10 @@ int main()
 	dist1 = calc_dist1(a ,b);
 	printf("%5f\n", dist1);*/
 	
-	char seq[20];
+	char seq[20]; //SEQUENCE MAX : 19CHAR
 	seq_stocker(seq, 12);
 	
-	for (int j = 1; j < 21; j++)
+	for (int j = 1; j < 20; j++)
 	{
 		printf("%c", seq[j]);
 	}
