@@ -36,3 +36,28 @@ void seq_stocker (char* seq, int i) //prends en arg le num de la seq,
 	fclose(F);
 }
 
+int seq_taille (char* seq)
+{
+	int t = 20; //valeur test
+	
+	return t; 
+}
+
+SEQUENCE seq_creer (int i) //prends en argument la sequence à 
+{							   //rentrer dans la variable SEQUENCE
+
+	SEQUENCE S;
+
+	
+	char seq[20];
+	seq_stocker(seq, i);
+	
+	S.taille = seq_taille(seq);
+	
+	for (int i = 0; i < 20; i++)
+	{
+		S.base[i] = seq[i];
+	}
+	
+	return S;
+}

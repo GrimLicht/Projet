@@ -5,10 +5,12 @@
 
 struct sequence
 {
-	char base[4];
-	int taille;
+	char base[20];
+	int taille; // Pas sûr qu'on en ai besoin
 	int famille;
 };
 typedef struct sequence SEQUENCE;
 
 void seq_stocker (char* seq, int i);
+
+SEQUENCE seq_creer (int i);
