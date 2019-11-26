@@ -7,7 +7,28 @@
 float calc_dist1 (SEQUENCE a, SEQUENCE b)
 {
 	float c = 0.0;
-	c = a.base[1] ^ b.base[1];
+	int u, d;
+	
+	
+	if(a.base[2] == 'A')
+		u = A;
+	if(a.base[2] == 'C')
+		u = C;
+	if(a.base[2] == 'G')
+		u = G;
+	if(a.base[2] == 'T')
+		u = T;
+		
+	if(b.base[2] == 'A')
+		d = A;
+	if(b.base[2] == 'C')
+		d = C;
+	if(b.base[2] == 'G')
+		d = G;
+	if(b.base[2] == 'T')
+		d = T;
+		
+	c = u ^ d;
 	
 	if (c > 2)
 		c = 2;
