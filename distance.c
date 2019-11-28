@@ -3,37 +3,67 @@
 #include "sequence.h"
 #include "distance.h"
 
-// Calcule pour D1
-float calc_dist1 (SEQUENCE a, SEQUENCE b)
+#define maxi(x,y) ((x)>(y)?(x):(y))
+
+float calc_dist0 (char a, char b, int taille)
 {
+	
 	float c = 0.0;
 	int u, d;
 	
-	
-	if(a.base[2] == 'A')
+	if(a == 'A')
 		u = A;
-	if(a.base[2] == 'C')
+	if(a == 'C')
 		u = C;
-	if(a.base[2] == 'G')
+	if(a == 'G')
 		u = G;
-	if(a.base[2] == 'T')
+	if(a == 'T')
 		u = T;
-		
-	if(b.base[2] == 'A')
+	
+	if(b == 'A')
 		d = A;
-	if(b.base[2] == 'C')
+	if(b == 'C')
 		d = C;
-	if(b.base[2] == 'G')
+	if(b == 'G')
 		d = G;
-	if(b.base[2] == 'T')
+	if(b == 'T')
 		d = T;
 		
 	c = u ^ d;
 	
 	if (c > 2)
-		c = 2;
-	
+		{c = 2;}
+		
+	if(((a == '-') || (b == '-')) && (a != b))
+		{c = 1.5;}
+		
 	return c;
+}
+
+// Calcul pour D1
+DISTANCE calc_dist1 (SEQUENCE a, SEQUENCE b)
+{
+	DISTANCE D1;
+	float e = 0.0;
+	int taille = maxi((a.taille), (b.taille));
+	
+	int i = 0;
+	for(i = 1; i <= taille; i++)
+	{
+		e += calc_dist0(a.base[i], b.base[i], taille);
+	}
+	
+	D1.dist = e;
+	D1.Seq1 = a.num;
+	D1.Seq2 = b.num;
+	
+	return D1;
+}
+
+
+void affiche_dist(DISTANCE D)
+{
+	printf("La distance entre vos 2 séquences est %.1f\n", D.dist);
 }
 
 

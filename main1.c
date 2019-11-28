@@ -4,7 +4,6 @@
 #include "distance.h"
 
 
-
 int main()
 {
 /*	float dist1 = 0;
@@ -14,28 +13,22 @@ int main()
 	printf("%5f\n", dist1);*/
 	
 	SEQUENCE S1, S2;
+	int i, j;
 	
+	i = presentation();
+	j = presentation2();
 	
-//	char seq[20];
+	S1 = seq_creer(i);
+	S2 = seq_creer(j);
 	
-//	seq_stocker(seq, 12);
-	S1 = seq_creer(12);
-	S2 = seq_creer(10);
+	S1 = echelonnage1(S1,S2);
+	S2 = echelonnage2(S1,S2);
 	
+	affiche_seq(S1,S2);
 	
-	for (int j = 1; j < 20; j++)
-	{
-		printf("%c", S1.base[j]);
-	}
-	printf("\n");
-	for (int j = 1; j < 20; j++)
-	{
-		printf("%c", S2.base[j]);
-	}
-	printf("\n");
-	
-	float o = calc_dist1(S1, S2);
-	printf("Distance entre S1 et S2 = %f\n", o);
+	DISTANCE D1;
+	D1 = calc_dist1(S1, S2);
+	affiche_dist(D1);
 	
 	exit(0);
 }
