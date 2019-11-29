@@ -33,6 +33,7 @@ int main(int argc, char** argv)
 	D1 = calc_dist1(S1, S2);
 //	D1 = calc_dist2(S1, S2);
 	affiche_dist(D1);
+	printf("Distance entre %d et %d : %.1f\n", D1.Seq1, D1.Seq2, Dist2(S1.base, S2.base, S1.taille, S2.taille));
 	
 	
 	free(S);

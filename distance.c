@@ -65,7 +65,7 @@ DISTANCE calc_dist1 (SEQUENCE a, SEQUENCE b)
 
 void affiche_dist(DISTANCE D)
 {
-	printf("La distance entre vos 2 séquences est %.1f\n", D.dist);
+	printf("La distance entre %d et %d est %.1f\n", D.Seq1, D.Seq2, D.dist);
 }
 
 
@@ -80,10 +80,8 @@ float Dist2 (char* a, char* b, int i, int j)
 {
 	float temp = 0.0;
 	int c;
-	
-//	for (i = a.taille; i > 1; i--); //<- On doit faire une recursion 
-									// dans ce sens (du max vers 0)
-	if ((i == 0) && (j > 1))
+
+	if ((i == 0) && (j != 0))
 	{
 		for(c = j; c > 0; c--)
 		{
@@ -92,7 +90,7 @@ float Dist2 (char* a, char* b, int i, int j)
 		return temp;
 	}
 	
-	if ((j == 0) && (i > 1))
+	if ((j == 0) != (i != 0))
 	{
 		for(c = i; c > 0; c--)
 		{
