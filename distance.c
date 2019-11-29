@@ -4,8 +4,10 @@
 #include "distance.h"
 
 #define maxi(x,y) ((x)>(y)?(x):(y))
+#define mini(x,y)  ((x)<(y)?(x):(y))
+#define min(x,y,z) ((x)<(mini(y, z))?(x):(mini(y,z)))
 
-float calc_dist0 (char a, char b, int taille)
+float calc_dist0 (char a, char b)
 {
 	
 	float c = 0.0;
@@ -50,7 +52,7 @@ DISTANCE calc_dist1 (SEQUENCE a, SEQUENCE b)
 	int i = 0;
 	for(i = 1; i <= taille; i++)
 	{
-		e += calc_dist0(a.base[i], b.base[i], taille);
+		e += calc_dist0(a.base[i], b.base[i]);
 	}
 	
 	D1.dist = e;
@@ -71,3 +73,21 @@ void affiche_dist(DISTANCE D)
  * La plus petite distance -> programmation dynamique (TD et CM faut voir)
  * -> Algorithme de Needleman-Wunsch
 */
+
+
+
+DISTANCE calc_dist2 (SEQUENCE a, SEQUENCE b)
+{
+	DISTANCE D2;
+	int i;
+	int j = i;
+	
+	for (i = a.taille; i > 0; i--); //<- On doit faire une recursion 
+									// dans ce sens (du max vers 0)
+	if (i == j)
+	{
+		D2.dist = calc_dist0(a.base[i], b.base[i]);
+	}
+	
+	return D2;
+}

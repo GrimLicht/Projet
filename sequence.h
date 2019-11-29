@@ -7,14 +7,14 @@ struct sequence
 {
 	int num; // Numero de la sequence
 	char base[20];
-	int taille; // Pas sûr qu'on en ai besoin
+	int taille;
 	int famille;
 };
 typedef struct sequence SEQUENCE;
 
-void seq_stocker (char* seq, int i);
+void seq_stocker (char* seq, char* rep, int i);
 
-SEQUENCE seq_creer (int i);
+SEQUENCE seq_creer (char* rep, int i);
 
 SEQUENCE echelonnage1(SEQUENCE S1, SEQUENCE S2);
 SEQUENCE echelonnage2(SEQUENCE S1, SEQUENCE S2);

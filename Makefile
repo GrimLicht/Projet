@@ -1,5 +1,5 @@
 partie1: main1
-	./main1 
+	./main1 sequences_ADN/
 	
 main1: main1.o distance.o sequence.o
 	gcc -Wall -o main1 main1.o sequence.o distance.o
