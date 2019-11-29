@@ -30,8 +30,8 @@ int main(int argc, char** argv)
 	affiche_seq(S1,S2);
 	
 	DISTANCE D1;
-//	D1 = calc_dist1(S1, S2);
-	D1 = calc_dist2(S1, S2);
+	D1 = calc_dist1(S1, S2);
+//	D1 = calc_dist2(S1, S2);
 	affiche_dist(D1);
 	
 	

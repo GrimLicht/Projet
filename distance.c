@@ -76,18 +76,32 @@ void affiche_dist(DISTANCE D)
 
 
 
-DISTANCE calc_dist2 (SEQUENCE a, SEQUENCE b)
+float Dist2 (char* a, char* b, int i, int j)
 {
-	DISTANCE D2;
-	int i;
-	int j = i;
+	float temp = 0.0;
+	int c;
 	
-	for (i = a.taille; i > 0; i--); //<- On doit faire une recursion 
+//	for (i = a.taille; i > 1; i--); //<- On doit faire une recursion 
 									// dans ce sens (du max vers 0)
-	if (i == j)
+	if ((i == 0) && (j > 1))
 	{
-		D2.dist = calc_dist0(a.base[i], b.base[i]);
+		for(c = j; c > 0; c--)
+		{
+			temp += calc_dist0(b[c], '-');
+		}
+		return temp;
 	}
 	
-	return D2;
+	if ((j == 0) && (i > 1))
+	{
+		for(c = i; c > 0; c--)
+		{
+			temp += calc_dist0(b[c], '-');
+		}
+		return temp;
+	}
+	
+	return min((Dist2(a, b, i-1, j-1) + calc_dist0(a[i], b[j])),
+				(Dist2(a, b, i, j-1) + calc_dist0('-', b[j])),
+				(Dist2(a, b, i-1, j) + calc_dist0(a[i], '-')));
 }
