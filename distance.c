@@ -69,37 +69,34 @@ void affiche_dist(DISTANCE D)
 }
 
 
-/* Pour D2 il faut un tableau à double entrées pour calculer 
- * La plus petite distance -> programmation dynamique (TD et CM faut voir)
- * -> Algorithme de Needleman-Wunsch
-*/
+//Il faut une chaine où tu enregistre les distances
 
 
-
-float Dist2 (char* a, char* b, int i, int j)
+float Dist2 (char* a, char* b, int i, int j, float save[][21])
 {
-	float temp = 0.0;
-	int c;
-
-	if ((i == 0) && (j != 0))
+//	printf("i : %d, j : %d\n", i, j);
+	if ((i == 0) && (j == 0))
 	{
-		for(c = j; c > 0; c--)
-		{
-			temp += calc_dist0(b[c], '-');
-		}
-		return temp;
+		return 0.0;
 	}
 	
-	if ((j == 0) != (i != 0))
+	if (((i == 0) || (j == 0)) && (i != j))
 	{
-		for(c = i; c > 0; c--)
-		{
-			temp += calc_dist0(b[c], '-');
-		}
-		return temp;
+		return (i*1.5);
 	}
 	
-	return min((Dist2(a, b, i-1, j-1) + calc_dist0(a[i], b[j])),
-				(Dist2(a, b, i, j-1) + calc_dist0('-', b[j])),
-				(Dist2(a, b, i-1, j) + calc_dist0(a[i], '-')));
+	
+	if (((i != 0) && (j != 0)) && (save[i][j]!=(-1)))
+	{
+		return  save[i][j];
+	}
+	
+	if (((i != 0) && (j != 0)) && (save[i][j] == (-1)))
+	{
+		save[i][j] = min((Dist2(a, b, i-1, j-1, save) + calc_dist0(a[i], b[j])),
+					(Dist2(a, b, i,   j-1, save) + 1.5),
+					(Dist2(a, b, i-1, j,   save)   + 1.5));
+					
+		return save[i][j];
+	}
 }

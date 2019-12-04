@@ -80,17 +80,18 @@ SEQUENCE echelonnage2(SEQUENCE S1, SEQUENCE S2){
 
 
 void affiche_seq(SEQUENCE S1, SEQUENCE S2){
-
+	int j;
 	printf("## ");
-	for (int j = 1; j <= 19; j++)
+	for (j = 1; j <= 19; j++)
 	{
 		printf("%c", S1.base[j]);
 	}
 	printf(" ##");
 	printf("  Taille : %d",S1.taille);
 	printf("\n");
+	
 	printf("## ");
-	for (int j = 1; j <= 19; j++)
+	for (j = 1; j <= 19; j++)
 	{
 		printf("%c", S2.base[j]);
 	}

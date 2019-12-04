@@ -13,4 +13,4 @@ DISTANCE calc_dist1(SEQUENCE a,SEQUENCE b);//renvoie la valeur de la distance
 
 void affiche_dist(DISTANCE D);
 
-float Dist2 (char* a, char* b, int i, int j);
+float Dist2 (char* a, char* b, int i, int j, float save[20][21]);
