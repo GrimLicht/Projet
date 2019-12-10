@@ -74,29 +74,33 @@ void affiche_dist(DISTANCE D)
 
 float Dist2 (char* a, char* b, int i, int j, float save[][21])
 {
-//	printf("i : %d, j : %d\n", i, j);
 	if ((i == 0) && (j == 0))
 	{
 		return 0.0;
 	}
 	
-	if (((i == 0) || (j == 0)) && (i != j))
+	else if (((i == 0) || (j == 0)) && (i != j))
 	{
 		return (i*1.5);
 	}
 	
 	
-	if (((i != 0) && (j != 0)) && (save[i][j]!=(-1)))
+	else if (((i != 0) && (j != 0)) && (save[i][j]!=(-1)))
 	{
 		return  save[i][j];
 	}
 	
-	if (((i != 0) && (j != 0)) && (save[i][j] == (-1)))
+	else if (((i != 0) && (j != 0)) && (save[i][j] == (-1)))
 	{
 		save[i][j] = min((Dist2(a, b, i-1, j-1, save) + calc_dist0(a[i], b[j])),
-					(Dist2(a, b, i,   j-1, save) + 1.5),
-					(Dist2(a, b, i-1, j,   save)   + 1.5));
+					(Dist2(a, b, i,   j-1, save)      + 1.5),
+					(Dist2(a, b, i-1, j,   save)      + 1.5));
 					
 		return save[i][j];
+	}
+	else 
+	{
+		printf("Erreur 3");
+		exit(0);
 	}
 }

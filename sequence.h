@@ -8,7 +8,6 @@ struct sequence
 	int num; // Numero de la sequence
 	char base[20];
 	int taille;
-	int famille;
 };
 typedef struct sequence SEQUENCE;
 
