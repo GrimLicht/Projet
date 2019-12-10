@@ -104,3 +104,55 @@ float Dist2 (char* a, char* b, int i, int j, float save[][21])
 		exit(0);
 	}
 }
+
+
+DISTANCE calc_dist2(SEQUENCE a, SEQUENCE b)
+{
+	DISTANCE D2;
+	D2.Seq1 = a.num;
+	D2.Seq2 = b.num;
+	
+	float save[20][21];
+	int i, j;
+	for (i = 0; i < 20; i++)
+	{
+		for (j = 0; j < 21; j++)
+		{
+			save[i][j] = -1;
+		}
+	}
+	i = a.taille;
+	j = b.taille;
+	
+	D2.dist = Dist2(a.base, b.base, i, j, save);
+	return D2;
+}
+
+void affiche_tab_dist(DISTANCE** D)
+{
+	printf("Numéro des sequences : %d - %d\n", D[18][19].Seq1, D[18][19].Seq2);
+	printf("Valeur de la distance : %.1f\n", D[18][19].dist);	
+}
+
+
+void fichier_dist(DISTANCE D)
+{
+	
+	FILE* fichier;
+
+    fichier = fopen("Fichier_Distance", "a");
+
+    if (fichier != NULL)
+    {
+        // On peut lire et écrire dans le fichier
+        fprintf(fichier,"%d - %d : %.1f\n",D.Seq1,D.Seq2,D.dist);
+    }
+    else
+    {
+        // On affiche un message d'erreur si on veut
+        printf("Impossible d'ouvrir le fichier Fichier_Distance.txt");
+    }
+
+	
+	fclose(fichier);
+}

@@ -25,7 +25,7 @@ int main(int argc, char** argv)
 //			S2 = echelonnage2(S1,S2);
 	
 			
-			D[f] = tab_D(S1,S2);
+			D[f] = calc_dist2(S1,S2);
 			
 			printf("%d & %d : %.1f\n",S1.num, S2.num, D[f].dist);
 			f++;

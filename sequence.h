@@ -11,9 +11,9 @@ struct sequence
 };
 typedef struct sequence SEQUENCE;
 
-void seq_stocker (char* seq, char* rep, int i);
+void seq_stocker (char* seq, int i);
 
-SEQUENCE seq_creer (char* rep, int i);
+SEQUENCE seq_creer (int i);
 
 SEQUENCE echelonnage1(SEQUENCE S1, SEQUENCE S2);
 SEQUENCE echelonnage2(SEQUENCE S1, SEQUENCE S2);

@@ -1,3 +1,5 @@
-CODES D'ERREURS : 
+CODESCODES D'ERREURS : 
 
 1 : erreur d'ouvertures des fichiers contenant les sequences
+2 : erreur d'ouvertures du fichiers contenant les distances
+3 : erreur d'ouvertures du fichier source contenant les sequences

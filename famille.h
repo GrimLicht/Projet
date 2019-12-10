@@ -8,7 +8,7 @@ typedef struct famille FAMILLE; //Classe les sequences par famille de sequence
 								//en fonction de leures distances d'editions
 
 
-FAMILLE find_famille(DISTANCE D[],int i); //Trouve les familles
+FAMILLE find_famille(DISTANCE D[]); //Trouve les familles
 
 void place_famille(FAMILLE []); //place familles dans un fichier par famille
 

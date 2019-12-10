@@ -16,8 +16,8 @@ int main(int argc, char** argv)
 	i = presentation(); //Seulement pour les tests pour verifier 
 	j = presentation2(); // fichier par fichier
 	
-	S1 = seq_creer(argv[1], i);
-	S2 = seq_creer(argv[1], j);
+	S1 = seq_creer(i);
+	S2 = seq_creer(j);
 	
 //	S1 = echelonnage1(S1,S2);
 //	S2 = echelonnage2(S1,S2);

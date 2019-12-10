@@ -55,9 +55,9 @@ void fichier_dist_trie(DISTANCE D[])
 }
 	
 	
-FAMILLE* find_famille(DISTANCE D[],int i)// int tab[21])
+FAMILLE find_famille(DISTANCE D[])// int tab[21])
 {
-	FAMILLE* F; 	
+	FAMILLE F; 	
 	F.nb_seq  = 0;
 	int save[21];
 	int tmp_cnt[21];

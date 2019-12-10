@@ -3,7 +3,7 @@
 #include "sequence.h"
 #include "distance.h"
 
-void seq_stocker (char* seq, char* rep, int i)
+void seq_stocker (char* seq, int i)
 {	//prends en arg le num de la seq, 
 	//renvoie la seq sous forme de tab
 	
@@ -12,9 +12,9 @@ void seq_stocker (char* seq, char* rep, int i)
 	FILE* F = NULL;
 
 	if (i < 10) //ouvre la sequence selon i
-		sprintf(namefile, "%sseq0%d.txt", rep, i);
+		sprintf(namefile, "sequences_ADN/seq0%d.txt", i);
 	else
-		sprintf(namefile, "%sseq%d.txt", rep, i);
+		sprintf(namefile, "sequences_ADN/seq%d.txt", i);
 	
 	F = fopen(namefile, "r");
 	
@@ -40,14 +40,14 @@ int seq_taille (char* seq, int i)
 	return (t - 1); 
 }
 
-SEQUENCE seq_creer (char* rep, int i) //prends en argument la sequence à 
+SEQUENCE seq_creer (int i) //prends en argument la sequence à 
 {							   //rentrer dans la variable SEQUENCE
 
 	SEQUENCE S;
 	S.num = i;
 	
 	char seq[20];
-	seq_stocker(seq, rep, i);
+	seq_stocker(seq, i);
 	
 	S.taille = seq_taille(seq,i);
 
