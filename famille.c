@@ -54,10 +54,20 @@ void fichier_dist_trie(DISTANCE D[])
 	fclose(fichier);
 }
 	
-	
-FAMILLE find_famille(DISTANCE D[])// int tab[21])
+int* init_tab(int tab[], int length)
 {
-	FAMILLE F; 	
+	int i;
+	for (i = 0; i < length; i++)
+	{
+		tab[i] = 0;
+	}
+	
+	return tab;
+}
+
+FAMILLE* find_famille(DISTANCE D[])// int tab[21]) 
+{ //idée : retourne un tab de famille et fait toutes les familles
+	FAMILLE F[10]; 	
 	F.nb_seq  = 0;
 	int save[21];
 	int tmp_cnt[21];
@@ -66,19 +76,22 @@ FAMILLE find_famille(DISTANCE D[])// int tab[21])
 	j = 0;
 	k = 1;
 	tmp = 0;
-	def = 0; // à chaque distance on va prendre la seq la plus représentée (def fois)
-	range = 1; //les distances sont les memes entre les indices
-	// range et old
+	def = 0; //à chaque distance on va prendre 
+	//la seq la plus représentée (def fois)
+	range = 1; //les distances sont les memes
+	//entre les indices range et old
 	old = 1;
 	int i = 1;
 	
+	tmp_cnt = init_tab(tmp_cnt, 21);
 	
-	tmp_cnt[D[i].Seq1]++;
-	tmp_cnt[D[i].Seq2]++;
+
 	while (i < 191)
 	{	
+		tmp_cnt[D[i].Seq1]++;
+		tmp_cnt[D[i].Seq2]++;
 		while (D[i].dist == D[i+1].dist) //augmente dans un tableau la 
-		{//case qui représente la séquence
+		{//case qui représente la séquence tant que les dist sont les meme
 			tmp_cnt[D[i+1].Seq1]++;
 			tmp_cnt[D[i+1].Seq2]++;
 			i++;			
@@ -87,7 +100,7 @@ FAMILLE find_famille(DISTANCE D[])// int tab[21])
 		
 		for (j = 1; j < 21; j++) // Cherche la seq la plus présente
 		{
-			if (tmp_cnt[j] > tmp_cnt[j])
+			if (tmp_cnt[j] > tmp_cnt[j-1])
 			{
 				tmp = j;
 			}
@@ -110,6 +123,7 @@ FAMILLE find_famille(DISTANCE D[])// int tab[21])
 				k++;
 				F.nb_seq++;
 			}
+			old++;
 		}
 	}
 	return F; 

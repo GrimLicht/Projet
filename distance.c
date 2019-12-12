@@ -72,37 +72,31 @@ void affiche_dist(DISTANCE D)
 //Il faut une chaine où tu enregistre les distances
 
 
-float Dist2 (char* a, char* b, int i, int j, float save[][21])
+float Dist2 (char* a, char* b, int i, int j, float save[][21]) //(SEQUENCE a, SEQUENCE b, float save[][21]);
 {
-	if ((i == 0) && (j == 0))
+	if ((i == 0) && (j == 0)) //((a.taille == 0) && (b.taille == 0))
 	{
 		return 0.0;
 	}
 	
-	else if (((i == 0) || (j == 0)) && (i != j))
+	else if ((i == 0) && (i != j))
+	{
+		return (j*1.5);
+	}
+	else if ((j == 0) && (i != j))
 	{
 		return (i*1.5);
 	}
 	
-	
-	else if (((i != 0) && (j != 0)) && (save[i][j]!=(-1)))
-	{
-		return  save[i][j];
-	}
-	
+
 	else if (((i != 0) && (j != 0)) && (save[i][j] == (-1)))
 	{
 		save[i][j] = min((Dist2(a, b, i-1, j-1, save) + calc_dist0(a[i], b[j])),
 					(Dist2(a, b, i,   j-1, save)      + 1.5),
 					(Dist2(a, b, i-1, j,   save)      + 1.5));
-					
-		return save[i][j];
 	}
-	else 
-	{
-		printf("Erreur 3");
-		exit(0);
-	}
+	return save[i][j];
+
 }
 
 

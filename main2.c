@@ -42,7 +42,7 @@ int main(int argc, char** argv)
 	while(i < 191) //Nombre total de distance
 	{	
 		i = k;
-		F[c] = find_famille(D,i);
+		F[c] = find_famille(D);
 		k = k + ((F[c].nb_seq)/2);
 		c++;
 	}
