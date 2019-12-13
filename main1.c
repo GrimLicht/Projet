@@ -4,7 +4,7 @@
 #include "distance.h"
 #define nb_seq 20
 
-int main(int argc, char** argv)
+int main()
 {
 	
 	SEQUENCE* S;
@@ -19,14 +19,10 @@ int main(int argc, char** argv)
 	S1 = seq_creer(i);
 	S2 = seq_creer(j);
 	
-//	S1 = echelonnage1(S1,S2);
-//	S2 = echelonnage2(S1,S2);
-	
 	affiche_seq(S1,S2);
 	
 	DISTANCE D1;
 	D1 = calc_dist1(S1, S2);
-//	D1 = calc_dist2(S1, S2);
 	affiche_dist(D1);
 	
 	

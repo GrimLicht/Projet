@@ -88,13 +88,13 @@ float Dist2 (char* a, char* b, int i, int j, float save[][21]) //(SEQUENCE a, SE
 		return (i*1.5);
 	}
 	
-
+	
 	else if (((i != 0) && (j != 0)) && (save[i][j] == (-1)))
 	{
-		//a.taille -= 1;a = (Dist2(a, b, i-1, j-1, save) + calc_dist0(a[i], b[j])),
-		//b =	(Dist2(a, b, i,   j-1, save)      + 1.5),
-		//c =		(Dist2(a, b, i-1, j,   save)      + 1.5));
-		//save[i][j] = min(a,b,c)
+		//a.taille -= 1; b.taille -= 1; o = (Dist2(a, b, save) + calc_dist0(a.base[a.taille+1], b.base[b.taille+1]));
+		//a.taille += 1;                k =	(Dist2(a, b, save) + 1.5);
+		//a.taille -= 1; b.taille += 1; l = (Dist2(a, b, save) + 1.5));
+		//save[i][j] = min(o, k, l);
 		
 		
 		save[i][j] = min((Dist2(a, b, i-1, j-1, save) + calc_dist0(a[i], b[j])),

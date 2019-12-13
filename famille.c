@@ -65,7 +65,7 @@ int* init_tab(int tab[], int length)
 	return tab;
 }
 
-FAMILLE* find_famille(DISTANCE D[])// int tab[21]) 
+FAMILLE* find_famille(DISTANCE D[]) 
 { //idée : retourne un tab de famille et fait toutes les familles
 	FAMILLE F[10]; 	
 	F.nb_seq  = 0;
@@ -81,7 +81,13 @@ FAMILLE* find_famille(DISTANCE D[])// int tab[21])
 	range = 1; //les distances sont les memes
 	//entre les indices range et old
 	old = 1;
+	int tab[21];
 	int i = 1;
+	
+	for (int z = 0; z < 21; z++)
+	{
+		save[z] = -1;
+	}
 	
 	tmp_cnt = init_tab(tmp_cnt, 21);
 	
@@ -97,6 +103,7 @@ FAMILLE* find_famille(DISTANCE D[])// int tab[21])
 			i++;			
 		}
 		range = i;
+		i++;
 		
 		for (j = 1; j < 21; j++) // Cherche la seq la plus présente
 		{
@@ -104,24 +111,28 @@ FAMILLE* find_famille(DISTANCE D[])// int tab[21])
 			{
 				tmp = j;
 			}
-		} //seq plus présente = seq tmp
+		}
+		
+		j = 1;
 		
 		while (old <= range)
 		{
 			//après avoir trouvé la seq+présente 
-			if (D[old].Seq1 == tmp) //si la dist actuelle est avec la seq+pré
+			if ((D[old].Seq1 == tmp) && (tab[D[old].Seq1] == -1)) //si la dist actuelle est avec la seq+pré
 			{//on ajoute l'autre séq dans la famille
 				save[tmp] = 1;
-				F.S[k] = D[old+1].Seq2;
+				F.S[k] = D[old].Seq2;
 				k++;
 				F.nb_seq++;
+				tab[D[old].Seq1] = 1;
 			}
-			if (D[old].Seq2 == tmp)
+			if ((D[old].Seq2 == tmp) && (tab[D[old].Seq2] == -1))
 			{
 				save[tmp] = 1;
-				F.S[k] = D[old+1].Seq1;
+				F.S[k] = D[old].Seq1;
 				k++;
 				F.nb_seq++;
+				tab[D[old].Seq2] = 1;
 			}
 			old++;
 		}
