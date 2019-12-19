@@ -11,55 +11,31 @@ int main(int argc, char** argv)
 {
 	
 	SEQUENCE S1, S2;
-	DISTANCE D[191]; //Nombre total de distance
+	DISTANCE D[21][21];
 	int i, j;
-	int f = 1;
-	for (i=1; i<=19; i++)
+	for (i = 1; i < 21; i++)
 	{
-		for(j=i+1; j<=20; j++)
+		for(j = 1; j < 21; j++)
 		{
 			S1 = seq_creer(i);
+			S1.num = i;
 			S2 = seq_creer(j);
-	
-//			S1 = echelonnage1(S1,S2);
-//			S2 = echelonnage2(S1,S2);
+			S2.num = j;
 			
-			D[f] = calc_dist2(S1,S2);
+			D[i][j] = calc_dist2(S1,S2);
 			
-			printf("%d & %d : %.1f\n",S1.num, S2.num, D[f].dist);
-			f++;
+//			printf("%d & %d : %.1f\n", i, j, D[i][j].dist);
 		}
 	}
 	
-	tri_a_bulle(D);
-	fichier_dist_trie(D);
-	FAMILLE F[6]; //On 5 Famille  # A METTRE EN DYNAMIC #
-//	int c,k;
-//	c = 1;
-//	k = 1;
-	i = 0;
-/*	while(i < 191) //Nombre total de distance
-	{	
-		i = k;
-		F[c] = find_famille(D);
-		k = k + ((F[c].nb_seq)/2);
-		c++;
-	}*/
-	
+//	tri_a_bulle(D);
+//	fichier_dist_trie(D);
+
+	FAMILLES F; 
 	F = find_famille(D);
-	printf("###\nPremière famille :\n");
-	printf("Nombre de Sequences dans la famille : %d\n", F->nb_seq);
-	
-	for (i = 0; i < 6; i++)
-	{
-		for (int j = 0; j < 25; j++)
-		{
-		printf("Distance entre %d et %d : %.3f", F[i].S[j].Seq1, F[i].S[j].Seq2, F[i].S[j].dist);
-		}
-	}
 	
 	
-	place_famille(F);
+	affiche_familles(F);
 	
 	return 0;
 }

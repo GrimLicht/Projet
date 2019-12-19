@@ -54,93 +54,154 @@ void fichier_dist_trie(DISTANCE D[])
 	fclose(fichier);
 }
 	
-int* init_tab(int tab[], int length)
+
+FAMILLES init_famille(FAMILLES F)
 {
 	int i;
-	for (i = 0; i < length; i++)
+	for (i=1;i<21;i++)
 	{
-		tab[i] = 0;
+		F.S[i] = 0;
 	}
-	
-	return tab;
+	return F;
 }
 
-FAMILLE* find_famille(DISTANCE D[]) 
-{ //idée : retourne un tab de famille et fait toutes les familles
-	FAMILLE F[10]; 	
-	F.nb_seq  = 0;
-	int save[21];
-	int tmp_cnt[21];
-	tmp_cnt[0] = 0; // compteur du nb d'apparence de la seq i
-	int j, k, range, old, def, tmp;
-	j = 0;
-	k = 1;
-	tmp = 0;
-	def = 0; //à chaque distance on va prendre 
-	//la seq la plus représentée (def fois)
-	range = 1; //les distances sont les memes
-	//entre les indices range et old
-	old = 1;
-	int tab[21];
-	int i = 1;
+FAMILLES find_famille(DISTANCE D[21][21])
+{
+	FAMILLES F;
+	F = init_famille(F);
+	F.nb_fam  = 0; //num de la famille
 	
-	for (int z = 0; z < 21; z++)
-	{
-		save[z] = -1;
-	}
+	int save[21]; //nb de fois où seq i est apparue pour dist_min
 	
-	tmp_cnt = init_tab(tmp_cnt, 21);
+	int pas_complet = 1; //est ce que chaque seq a une famille
+	
+	float dist_min; //plus petite distance
+	
+	int i, j;
+	
+	int most;
+	
+	
+	printf("##############\n");
+
 	
 
-	while (i < 191)
+	while (pas_complet)
 	{	
-		tmp_cnt[D[i].Seq1]++;
-		tmp_cnt[D[i].Seq2]++;
-		while (D[i].dist == D[i+1].dist) //augmente dans un tableau la 
-		{//case qui représente la séquence tant que les dist sont les meme
-			tmp_cnt[D[i+1].Seq1]++;
-			tmp_cnt[D[i+1].Seq2]++;
-			i++;			
-		}
-		range = i;
-		i++;
+		F.nb_fam++;
+		pas_complet = 0;
+		dist_min = 30;
+		most = 0;
 		
-		for (j = 1; j < 21; j++) // Cherche la seq la plus présente
+		for (int z = 0; z < 21; z++)
 		{
-			if (tmp_cnt[j] > tmp_cnt[j-1])
-			{
-				tmp = j;
-			}
+			save[z] = 0;
 		}
-		
-		j = 1;
-		
-		while (old <= range)
+	
+		for (i=1; i<21; i++)
 		{
-			//après avoir trouvé la seq+présente 
-			if ((D[old].Seq1 == tmp) && (tab[D[old].Seq1] == -1)) //si la dist actuelle est avec la seq+pré
-			{//on ajoute l'autre séq dans la famille
-				save[tmp] = 1;
-				F.S[k] = D[old].Seq2;
-				k++;
-				F.nb_seq++;
-				tab[D[old].Seq1] = 1;
-			}
-			if ((D[old].Seq2 == tmp) && (tab[D[old].Seq2] == -1))
+			if (F.S[i] == 0) //si la sequence 1 n'a pas de famille
 			{
-				save[tmp] = 1;
-				F.S[k] = D[old].Seq1;
-				k++;
-				F.nb_seq++;
-				tab[D[old].Seq2] = 1;
+				
+				for (j=i+1; j<21; j++)
+				{
+					if(F.S[j] == 0) //si la sequence j n'a pas de fam.
+					{
+						if (dist_min > D[i][j].dist)
+							{dist_min = D[i][j].dist;}//actualise d_min
+					}
+				}
+				
 			}
-			old++;
 		}
-	}
+		printf("dist_min = %.1f\n",dist_min);
+		
+		for (i=1;i<21;i++)
+		{
+			if (F.S[i] == 0)
+			{
+				for (j=i+1; j<21; j++)
+				{
+					if (F.S[j] == 0)
+					{
+						if (dist_min == D[i][j].dist)
+						{
+							printf("seq [%d]-[%d]\n",i,j);
+							save[i]++;
+							save[j]++;
+						}
+						
+					}
+				}
+				
+			}
+		}
+		
+		j = 0;
+		for (i=1; i<21; i++){
+			if(F.S[i] == 0 && (most < save[i]))
+			{
+				most = save[i];
+				j = i;
+			}
+		}
+		
+		F.S[j] = F.nb_fam;//ajout de la seq la plus frequente pour dist_min
+
+		for (i=1; i<21; i++)
+		{
+			printf("seq[%d] -> famille %d\n",i,F.S[i]);
+			if (F.S[i] == 0 && i!=j)
+			{
+				printf("   			D[%d][%d] = %.1f\n",i,j,D[i][j].dist);
+				if(D[i][j].dist == dist_min)
+				{
+					F.S[i] = F.nb_fam;
+					printf("			F.S[%d] = %d\n",i,F.S[i]);
+				}
+			}
+		}
+		printf("F.S[%d] = %d\n",j,F.S[j]);
+		printf("##############\n");
+		
+		for (i=1; i<21; i++)
+		{
+			if(F.S[i] == 0)
+			{
+				pas_complet = 1;
+				break;
+			}
+		}
+		printf(" \n");
+		
+	} //fin while(pas_complet)
+	
+	
 	return F; 
 }
 	
+void affiche_familles(FAMILLES F)
+{
+	int i, j;
+	for(i=1; i <= F.nb_fam; i++)
+	{
+		printf("Famille numéro %d\n",i); 
+		printf("groupe sequences : ");
+		
+		for (j=1; j<21; j++)
+		{
+			if (F.S[j]==i)
+			{
+				printf("[%d]   ",j);
+			}
+			
+		}
+		
+		printf("\n\n");
+	}
 	
+}
+
 int copier_fichier(char const * const source, char const * const destination) 
 { 
     FILE* fSource; 
@@ -151,13 +212,13 @@ int copier_fichier(char const * const source, char const * const destination)
     if ((fSource = fopen(source, "r")) == NULL) 
     { 
         return 3; //Si le fichier est vide
-    } 
+    }
   
     if ((fDestination = fopen(destination, "w")) == NULL) 
     { 
         fclose(fSource); 
         return 3; 
-    } 
+    }
   
     while ((NbLus = fread(buffer, 1, 512, fSource)) != 0) 
 		{
@@ -171,8 +232,8 @@ int copier_fichier(char const * const source, char const * const destination)
 }
 	
 	
-		
-void place_famille(FAMILLE F[])
+//A CORRIGER
+/* void place_famille(FAMILLE F[]) //A CORRIGER
 {
 	//Idée : tu me crés le dossier et on ecrit directement dedans le sequences
 	int k;
@@ -201,4 +262,4 @@ void place_famille(FAMILLE F[])
 		}
 	}
 
-}
+} */

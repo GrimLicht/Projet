@@ -41,9 +41,6 @@ archive:
 
 	
 clean:
-	rm -f main1.o
+	rm -f *.o
 	rm -f main1
-	rm -f distance.o
-	rm -f sequence.o
-	rm -f main2.o
 	rm -f main2

@@ -1,17 +1,17 @@
-struct famille
+struct familles
 {
-	int nb_seq; //Nombre de sequence dans la famille
-	struct famille* suiv;
-	int S[25];	//Quelle distance est dans la Famille
+	int nb_fam; //Nombre de familles
+	int S[21];	//Quelle séquence est dans quelle Famille
 }; 
-typedef struct famille FAMILLE; //Classe les sequences par famille de sequence 
+typedef struct familles FAMILLES; //Classe les sequences par famille de sequence 
 								//en fonction de leures distances d'editions
 
+FAMILLES find_famille(DISTANCE D[21][21]);
 
-FAMILLE find_famille(DISTANCE D[]); //Trouve les familles
-
-void place_famille(FAMILLE []); //place familles dans un fichier par famille
+void place_famille(FAMILLES F); //place familles dans un fichier par famille
 
 void tri_a_bulle(DISTANCE D[]); //Trie le Tableau de distance
 
 void fichier_dist_trie(DISTANCE D[]); //Affiche le tableau de distance trié
+
+void affiche_familles(FAMILLES F);

@@ -44,7 +44,6 @@ SEQUENCE seq_creer (int i) //prends en argument la sequence à
 {							   //rentrer dans la variable SEQUENCE
 
 	SEQUENCE S;
-	S.num = i;
 	
 	char seq[20];
 	seq_stocker(seq, i);

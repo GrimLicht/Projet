@@ -112,9 +112,9 @@ DISTANCE calc_dist2(SEQUENCE a, SEQUENCE b)
 	D2.Seq1 = a.num;
 	D2.Seq2 = b.num;
 	
-	float save[20][21];
+	float save[21][21];
 	int i, j;
-	for (i = 0; i < 20; i++)
+	for (i = 0; i < 21; i++)
 	{
 		for (j = 0; j < 21; j++)
 		{
